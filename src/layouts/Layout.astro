@@ -1,0 +1,63 @@
+---
+import "../styles/global.css";
+import { siteConfig } from "../config/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const pageTitle = title ?? siteConfig.seo.title;
+const pageDescription = description ?? siteConfig.seo.description;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Plumber",
+        name: siteConfig.business.name,
+        telephone: siteConfig.business.phone,
+        email: siteConfig.business.email,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: siteConfig.business.address.street,
+          addressLocality: siteConfig.business.address.city,
+          addressRegion: siteConfig.business.address.state,
+          postalCode: siteConfig.business.address.zip,
+        },
+      })}
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="bg-[color:var(--color-paper)]">
+    <slot />
+  </body>
+</html>

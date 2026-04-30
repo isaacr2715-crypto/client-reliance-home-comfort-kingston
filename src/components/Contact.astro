@@ -1,0 +1,161 @@
+---
+import { siteConfig } from "../config/site";
+const { business } = siteConfig;
+const mapQuery = encodeURIComponent(
+  `${business.address.street}, ${business.address.city}, ${business.address.state} ${business.address.zip}`
+);
+---
+
+<section id="contact" class="border-b-2 border-[color:var(--color-ink)]">
+  <div class="max-w-[1240px] mx-auto px-5 lg:px-8 py-20 lg:py-28">
+    <div class="grid grid-cols-12 gap-6 lg:gap-10 mb-14">
+      <div class="col-span-12 lg:col-span-4">
+        <div class="stamp-accent mb-5">Get in touch</div>
+      </div>
+      <div class="col-span-12 lg:col-span-8">
+        <h2 class="display text-[48px] sm:text-[68px] lg:text-[88px]">
+          Fastest way: call. Second fastest: this form.
+        </h2>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-6 lg:gap-10">
+      <!-- Left: contact details in a structured dl -->
+      <div class="col-span-12 lg:col-span-5 space-y-0">
+        <!-- Phone block, very prominent -->
+        <a
+          href={`tel:${business.phoneRaw}`}
+          class="group block border-2 border-[color:var(--color-ink)] p-6 hover:bg-[color:var(--color-ink)] transition-colors mb-5"
+        >
+          <div class="stamp-accent mb-3 group-hover:!text-[color:var(--color-paper-warm)] transition-colors">Call the shop</div>
+          <div class="display-mixed text-[38px] lg:text-[44px] tabular-nums leading-none group-hover:text-[color:var(--color-paper)] transition-colors">
+            {business.phone}
+          </div>
+        </a>
+
+        <dl class="space-y-0 border-2 border-[color:var(--color-ink)] divide-y-2 divide-[color:var(--color-ink)]">
+          <div class="p-5">
+            <dt class="stamp mb-2">Email</dt>
+            <dd>
+              <a href={`mailto:${business.email}`} class="display-mixed text-xl hover:text-[color:var(--color-accent)]">
+                {business.email}
+              </a>
+            </dd>
+          </div>
+
+          <div class="p-5">
+            <dt class="stamp mb-2">Shop</dt>
+            <dd class="display-mixed text-xl leading-tight">
+              {business.address.street}<br />
+              {business.address.city}, {business.address.state} {business.address.zip}
+            </dd>
+          </div>
+
+          <div class="p-5">
+            <dt class="stamp mb-3">Hours</dt>
+            <dd>
+              <ul class="space-y-2">
+                {business.hours.map((h) => (
+                  <li class="flex justify-between items-baseline text-[15px]">
+                    <span class="font-medium">{h.day}</span>
+                    <span class="tabular-nums text-[color:var(--color-ink-soft)]">{h.hours}</span>
+                  </li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+        </dl>
+
+        <!-- Map -->
+        <div class="mt-5 border-2 border-[color:var(--color-ink)] h-64 overflow-hidden">
+          <iframe
+            src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
+            width="100%"
+            height="100%"
+            style="border:0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Map"
+          ></iframe>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <form
+        class="col-span-12 lg:col-span-7 border-2 border-[color:var(--color-ink)] p-6 lg:p-10 bg-[color:var(--color-paper)]"
+        action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+        method="POST"
+      >
+        <div class="stamp-accent mb-6">Send us a message</div>
+
+        <div class="space-y-6">
+          <div class="grid grid-cols-2 gap-5">
+            <label class="block">
+              <span class="stamp block mb-2">Name</span>
+              <input
+                type="text"
+                name="name"
+                required
+                class="w-full bg-transparent border-0 border-b-2 border-[color:var(--color-ink)] pb-2 display-mixed text-xl focus:outline-none focus:border-[color:var(--color-accent)]"
+              />
+            </label>
+            <label class="block">
+              <span class="stamp block mb-2">Phone</span>
+              <input
+                type="tel"
+                name="phone"
+                required
+                class="w-full bg-transparent border-0 border-b-2 border-[color:var(--color-ink)] pb-2 display-mixed text-xl tabular-nums focus:outline-none focus:border-[color:var(--color-accent)]"
+              />
+            </label>
+          </div>
+
+          <label class="block">
+            <span class="stamp block mb-2">Address</span>
+            <input
+              type="text"
+              name="address"
+              class="w-full bg-transparent border-0 border-b-2 border-[color:var(--color-ink)] pb-2 display-mixed text-xl focus:outline-none focus:border-[color:var(--color-accent)]"
+            />
+          </label>
+
+          <label class="block">
+            <span class="stamp block mb-2">Service needed</span>
+            <select
+              name="service"
+              class="w-full bg-transparent border-0 border-b-2 border-[color:var(--color-ink)] pb-2 display-mixed text-xl focus:outline-none focus:border-[color:var(--color-accent)]"
+            >
+              <option>Emergency / leak</option>
+              <option>Water heater</option>
+              <option>Drain cleaning</option>
+              <option>Repipe / rough-in</option>
+              <option>Old-house plumbing</option>
+              <option>Gas line</option>
+              <option>Other</option>
+            </select>
+          </label>
+
+          <label class="block">
+            <span class="stamp block mb-2">What's going on?</span>
+            <textarea
+              name="message"
+              rows="4"
+              class="w-full bg-transparent border-0 border-b-2 border-[color:var(--color-ink)] pb-2 text-[16px] leading-relaxed focus:outline-none focus:border-[color:var(--color-accent)] resize-none"
+            ></textarea>
+          </label>
+
+          <button
+            type="submit"
+            class="w-full display-mixed text-2xl bg-[color:var(--color-ink)] text-[color:var(--color-paper)] hover:bg-[color:var(--color-accent)] transition-colors py-4"
+          >
+            Send →
+          </button>
+
+          <p class="text-xs text-[color:var(--color-ink-mute)] tracking-wide">
+            We reply within the hour during shop hours. For emergencies, call — the form goes to email.
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

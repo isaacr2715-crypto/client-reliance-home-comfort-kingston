@@ -1,0 +1,55 @@
+---
+import { siteConfig } from "../config/site";
+const { about, business } = siteConfig;
+---
+
+<section id="shop" class="bg-[color:var(--color-ink)] text-[color:var(--color-paper)] border-b-2 border-[color:var(--color-ink)]">
+  <div class="max-w-[1240px] mx-auto px-5 lg:px-8 py-20 lg:py-28">
+    <div class="grid grid-cols-12 gap-6 lg:gap-10 mb-16 lg:mb-20">
+      <div class="col-span-12 lg:col-span-4">
+        <div class="stamp !text-[color:var(--color-accent)] mb-5">{about.eyebrow}</div>
+      </div>
+      <div class="col-span-12 lg:col-span-8">
+        <h2 class="display text-[48px] sm:text-[68px] lg:text-[88px] leading-[0.95]">
+          {about.headline}
+        </h2>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-6 lg:gap-10 mb-20">
+      <!-- Owner attribution, runs as a small sidebar -->
+      <aside class="col-span-12 lg:col-span-4">
+        <div class="border-l-2 border-[color:var(--color-accent)] pl-5">
+          <div class="stamp !text-[color:var(--color-paper)]/50 mb-2">Written by</div>
+          <div class="display-mixed text-2xl">{business.owner}</div>
+          <div class="text-sm text-[color:var(--color-paper)]/70 mt-1">{business.ownerRole}</div>
+        </div>
+      </aside>
+
+      <div class="col-span-12 lg:col-span-8 space-y-5 text-[16.5px] lg:text-[17px] leading-[1.8] text-[color:var(--color-paper)]/85 max-w-[60ch]">
+        {about.body.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+
+    <!-- Big stat callout + sidebar stats -->
+    <div class="grid grid-cols-12 gap-6 lg:gap-10 pt-10 border-t-2 border-[color:var(--color-paper)]/25">
+      <!-- One featured number -->
+      <div class="col-span-12 lg:col-span-6">
+        <div class="stamp !text-[color:var(--color-accent)] mb-3">{about.bigStat.label}</div>
+        <div class="display text-[120px] sm:text-[180px] lg:text-[220px] leading-[0.85] text-[color:var(--color-paper)]">
+          {about.bigStat.value}
+        </div>
+      </div>
+
+      <!-- Secondary stats as tabular list -->
+      <dl class="col-span-12 lg:col-span-6 lg:border-l-2 lg:border-[color:var(--color-paper)]/25 lg:pl-10">
+        {about.stats.map((stat) => (
+          <div class="flex justify-between items-baseline py-4 border-b border-[color:var(--color-paper)]/15">
+            <dt class="stamp !text-[color:var(--color-paper)]/60">{stat.label}</dt>
+            <dd class="display-mixed text-3xl lg:text-4xl tabular-nums">{stat.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>

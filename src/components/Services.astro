@@ -1,0 +1,40 @@
+---
+import { siteConfig } from "../config/site";
+const { services } = siteConfig;
+---
+
+<section id="services" class="border-b-2 border-[color:var(--color-ink)]">
+  <div class="max-w-[1240px] mx-auto px-5 lg:px-8 py-20 lg:py-28">
+    <div class="grid grid-cols-12 gap-6 lg:gap-10 mb-14 lg:mb-20">
+      <div class="col-span-12 lg:col-span-4">
+        <div class="stamp-accent mb-5">What we do</div>
+      </div>
+      <div class="col-span-12 lg:col-span-8">
+        <h2 class="display text-[52px] sm:text-[72px] lg:text-[96px]">
+          If it's pipes, valves, or drains — we handle it.
+        </h2>
+      </div>
+    </div>
+
+    <ol>
+      {services.map((service, i) => (
+        <li class="grid grid-cols-12 gap-6 lg:gap-10 py-8 lg:py-10 border-t-2 border-[color:var(--color-ink)] last:border-b-2 group hover:bg-[color:var(--color-paper-warm)]/60 transition-colors">
+          <div class="col-span-12 md:col-span-4 lg:col-span-3 flex items-start gap-4">
+            <span class="display text-[56px] lg:text-[80px] text-[color:var(--color-accent)] leading-none tabular-nums">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+          </div>
+
+          <div class="col-span-12 md:col-span-8 lg:col-span-9">
+            <h3 class="display-mixed text-[28px] lg:text-[36px] mb-3 text-[color:var(--color-ink)]">
+              {service.title}
+            </h3>
+            <p class="text-[16px] lg:text-[17px] leading-[1.7] text-[color:var(--color-ink-soft)] max-w-[68ch]">
+              {service.description}
+            </p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

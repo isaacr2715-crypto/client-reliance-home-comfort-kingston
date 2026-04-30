@@ -1,0 +1,31 @@
+---
+import { siteConfig } from "../config/site";
+const { business } = siteConfig;
+---
+
+<header class="bg-[color:var(--color-paper)] border-b-2 border-[color:var(--color-ink)]">
+  <div class="max-w-[1240px] mx-auto px-5 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <a href="#" class="flex items-baseline gap-3">
+        <span class="display text-[28px] lg:text-[32px] tracking-tight">{business.shortName ?? business.name}</span>
+        <span class="stamp hidden sm:inline">EST. {business.established}</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#services" class="hover:text-[color:var(--color-accent)]">Services</a>
+        <a href="#shop" class="hover:text-[color:var(--color-accent)]">The shop</a>
+        <a href="#reviews" class="hover:text-[color:var(--color-accent)]">Reviews</a>
+        <a href="#contact" class="hover:text-[color:var(--color-accent)]">Call us</a>
+      </nav>
+
+      <a
+        href={`tel:${business.phoneRaw}`}
+        class="inline-flex items-center gap-3 display-mixed text-xl bg-[color:var(--color-ink)] text-[color:var(--color-paper)] hover:bg-[color:var(--color-accent)] px-5 py-2.5 transition-colors tabular-nums"
+      >
+        <span class="text-[color:var(--color-accent)] mr-1" aria-hidden="true">☎</span>
+        <span class="hidden sm:inline">{business.phone}</span>
+        <span class="sm:hidden">CALL</span>
+      </a>
+    </div>
+  </div>
+</header>

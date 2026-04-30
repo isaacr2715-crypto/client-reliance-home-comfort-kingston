@@ -1,0 +1,49 @@
+---
+import { siteConfig } from "../config/site";
+const { business } = siteConfig;
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-[color:var(--color-ink)] text-[color:var(--color-paper)]">
+  <!-- diagonal tape accent above footer -->
+  <div class="diagonal-tape h-1.5"></div>
+
+  <div class="max-w-[1240px] mx-auto px-5 lg:px-8 py-12">
+    <div class="grid grid-cols-12 gap-6 lg:gap-10 mb-10">
+      <div class="col-span-12 lg:col-span-5">
+        <div class="display text-[48px] lg:text-[64px] text-[color:var(--color-paper)]">
+          {business.shortName ?? business.name}
+        </div>
+        <div class="stamp !text-[color:var(--color-paper)]/50 mt-2">
+          {business.address.city}, {business.address.state} · since {business.established}
+        </div>
+      </div>
+
+      <div class="col-span-6 lg:col-span-3">
+        <div class="stamp-accent mb-3">Reach us</div>
+        <ul class="space-y-1.5 text-sm">
+          <li><a href={`tel:${business.phoneRaw}`} class="tabular-nums hover:text-[color:var(--color-accent)]">{business.phone}</a></li>
+          <li><a href={`mailto:${business.email}`} class="hover:text-[color:var(--color-accent)]">{business.email}</a></li>
+          <li class="text-[color:var(--color-paper)]/60">{business.address.street}</li>
+        </ul>
+      </div>
+
+      <div class="col-span-6 lg:col-span-4">
+        <div class="stamp-accent mb-3">Credentials</div>
+        <ul class="space-y-1.5 text-sm text-[color:var(--color-paper)]/70">
+          <li>{business.license}</li>
+          <li>{business.insurance}</li>
+          <li>{business.tripFee}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-[color:var(--color-paper)]/20 pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+      <p class="stamp !text-[color:var(--color-paper)]/50">© {year} {business.name}. All rights reserved.</p>
+      <div class="flex gap-5 text-xs text-[color:var(--color-paper)]/50">
+        <a href="/privacy" class="hover:text-[color:var(--color-paper)]">Privacy</a>
+        <a href="/terms" class="hover:text-[color:var(--color-paper)]">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>

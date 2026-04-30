@@ -1,0 +1,41 @@
+---
+import { siteConfig } from "../config/site";
+const { reviews } = siteConfig;
+---
+
+<section id="reviews" class="border-b-2 border-[color:var(--color-ink)] bg-[color:var(--color-paper-warm)]">
+  <div class="max-w-[1240px] mx-auto px-5 lg:px-8 py-20 lg:py-28">
+    <div class="grid grid-cols-12 gap-6 lg:gap-10 mb-14">
+      <div class="col-span-12 lg:col-span-4">
+        <div class="stamp-accent mb-5">Google reviews · 4.9 ★ · 412 ratings</div>
+      </div>
+      <div class="col-span-12 lg:col-span-8">
+        <h2 class="display text-[48px] sm:text-[68px] lg:text-[88px]">
+          Don't take it from us.
+        </h2>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 border-t-2 border-[color:var(--color-ink)]">
+      {reviews.map((review, i) => (
+        <figure class={`py-10 border-b-2 md:border-b-0 border-[color:var(--color-ink)] ${i < 2 ? 'md:border-r-2' : ''} px-0 md:px-8 first:md:pl-0 last:md:pr-0 flex flex-col`}>
+          <div class="stamp-accent mb-6 flex items-center gap-3">
+            <span class="text-[color:var(--color-accent)]" aria-hidden="true">★★★★★</span>
+            <span class="!text-[color:var(--color-ink-soft)]">{review.source}</span>
+          </div>
+
+          <blockquote class="display-mixed text-[22px] lg:text-[24px] leading-[1.2] text-[color:var(--color-ink)] mb-8 flex-grow">
+            "{review.text}"
+          </blockquote>
+
+          <figcaption class="pt-4 border-t-2 border-[color:var(--color-ink)]/20">
+            <div class="display-mixed text-xl text-[color:var(--color-ink)]">{review.name}</div>
+            {review.location && (
+              <div class="stamp mt-1">{review.location}</div>
+            )}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

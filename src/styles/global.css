@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  /* Trade-shop palette — warm cream paper, deep navy ink, restrained safety orange */
+  --color-paper: #F4EFE2;
+  --color-paper-warm: #EADFC6;
+  --color-ink: #0E1F2E;
+  --color-ink-soft: #2B3A4A;
+  --color-ink-mute: #6B7785;
+  --color-rule: #0E1F2E;
+  --color-accent: #D14A16;         /* safety-orange, a touch deeper than flat orange */
+  --color-accent-deep: #A1350C;
+
+  --font-display: "Barlow Condensed", Impact, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-paper);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.display-mixed {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.stamp {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+.stamp-accent {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+/* Hairline rules. We use these between sections — no soft shadows or gradients. */
+.rule-ink {
+  border-top: 2px solid var(--color-ink);
+}
+.rule-ink-soft {
+  border-top: 1px solid rgba(14, 31, 46, 0.18);
+}
+
+/* Diagonal stripe texture for small accent areas (think work-zone tape) */
+.diagonal-tape {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-ink) 0 8px,
+    var(--color-accent) 8px 16px
+  );
+}
